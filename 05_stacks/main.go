@@ -48,7 +48,8 @@ func main() {
 			buildInitialStack(stackArray, inputStack)
 		} else {
 			// Start executing instructions
-			executeInstruction(stackArray, currentLine)
+			// executeInstruction(stackArray, currentLine)
+			crateMover9001(stackArray, currentLine)
 		}
 	}
 	// Once all of the instructions are ran, the top element of
@@ -78,6 +79,31 @@ func executeInstruction(stackArray []utils.Stack, currentLine string) {
 			crate, _ := stackArray[from-1].Pop()
 			stackArray[to-1].Push(crate)
 		}
+	}
+}
+
+func crateMover9001(stackArray []utils.Stack, currentLine string) {
+	// https://www.golangprograms.com/regular-expression-to-extract-numbers-from-a-string-in-golang.html
+	re := regexp.MustCompile(`[-]?\d[\d,]*[\.]?[\d{2}]*`)
+	matches := re.FindAllString(currentLine, -1)
+	if len(matches) != 3 {
+		log.Fatal("whoops")
+	}
+	count, _ := strconv.Atoi(matches[0])
+	from, _ := strconv.Atoi(matches[1])
+	to, _ := strconv.Atoi(matches[2])
+
+	var tmp utils.Stack
+	for i := 0; i < count; i++ {
+		// Take one down, pass it around~
+		if !stackArray[from-1].IsEmpty() {
+			crate, _ := stackArray[from-1].Pop()
+			tmp.Push(crate)
+		}
+	}
+	for len(tmp) > 0 {
+		crate, _ := tmp.Pop()
+		stackArray[to-1].Push(crate)
 	}
 }
 
