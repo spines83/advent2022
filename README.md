@@ -1,0 +1,1 @@
+After being a pretty heavy python junkie most of my career, I wanted to take a chance to start learning Go and Advent of Code 2022 (https://adventofcode.com/2022) was a perfect excuse to do so. 
