@@ -1,0 +1,3 @@
+There might be a more elegant way here to avoid walking the string 4 times instead of just one. Took an initial first pass at it using a map and needing to manipulate it every time you hit a duplicate character. But it ended up being a fairly unwieldy approach where you were using one map to keep track of which index the character was found at and then another map to store fact-of a character being found. Could probably make it work with the value being a lightweight data-structure.
+
+Ended up going with a fairly straightforward approach that runs in O(n). 
