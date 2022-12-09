@@ -2,10 +2,8 @@ package main
 
 import (
 	"advent2022/utils"
-	"bufio"
 	"fmt"
 	"log"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -14,15 +12,6 @@ import (
 
 func main() {
 
-	readFile, err := os.Open("full_input.txt")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-
 	// We use a stack to track the input
 	var inputStack utils.Stack
 
@@ -30,9 +19,8 @@ func main() {
 	// This will get initialized later once we figure out how large the input is
 	var stackArray []utils.Stack
 
-	for fileScanner.Scan() {
-		currentLine := fileScanner.Text()
-
+	lines, _ := utils.IterLines("full_input.txt")
+	for currentLine := range lines {
 		if IsABoxLine(currentLine) {
 			// Defer processing the inital crates until we've scanned them all
 			// Use a stack so we can put them back in the proper order
@@ -58,8 +46,6 @@ func main() {
 		topCrate, _ := stackArray[i].Peek()
 		fmt.Printf("%s", topCrate)
 	}
-
-	readFile.Close()
 }
 
 func executeInstruction(stackArray []utils.Stack, currentLine string) {
