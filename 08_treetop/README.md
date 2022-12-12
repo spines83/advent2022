@@ -1,0 +1,1 @@
+Pretty straightforward 2d array problem. Would have been better to TDD this one, but it was getting a bit late and I was curious if the first blind attempt would work.

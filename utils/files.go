@@ -25,3 +25,14 @@ func IterLines(path string) (<-chan string, error) {
 
 	return chn, nil
 }
+
+// Quick and dirty utility to count lines in a file
+func CountLines(inputFile string) int {
+	file, _ := os.Open(inputFile)
+	fileScanner := bufio.NewScanner(file)
+	lineCount := 0
+	for fileScanner.Scan() {
+		lineCount++
+	}
+	return lineCount
+}
